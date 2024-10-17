@@ -1,7 +1,10 @@
+function playGame() {
+
+// Initialize scores
 let humanScore = 0;
 let computerScore = 0;
 
-
+// Helper function to generate a random computer choice
 function getComputerChoice() {
     const randomNumber = Math.floor(Math.random() * 3);
     if (randomNumber === 0) {
@@ -12,8 +15,8 @@ function getComputerChoice() {
         return "paper";
     }
 }
-console.log(getComputerChoice());
 
+// Helper function to get human choice
 function getHumanChoice() {
     let choice = prompt("Rock, paper, or scissors?").toLowerCase();
     while (choice !== "rock" && choice !== "scissors" && choice !== "paper") {
@@ -21,13 +24,11 @@ function getHumanChoice() {
     } 
     return choice;
 }
-console.log(getHumanChoice())
-
 
 const humanChoice = getHumanChoice();
 const computerChoice = getComputerChoice();
 
-
+// Play a round and get the result
 function playRound(humanChoice, computerChoice) {
 
     // log choices for clarity
@@ -50,10 +51,27 @@ function playRound(humanChoice, computerChoice) {
         console.log(`You lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`)
         computerScore++
     }
-    // Display updated scores
-    console.log(`Human Score: ${humanScore}, Computer Score: ${computerScore}`)
+    // Display updated scores after each round
+    console.log(`Current Scores: Human ${humanScore}, Computer ${computerScore}`)
 }
 
-function playGame() {
 
+// Play 5 rounds
+    for (let i = 1; i <= 5; i++) {
+        playRound(humanChoice, computerChoice);
+    }
+
+    // Declare overall winner based on scores
+    if (humanScore === computerScore) {
+        // Both scores equal
+        console.log("It's a tie!")
+    } else if (humanScore > computerScore) {
+        // Human wins
+        console.log(`You win! You scored: ${humanScore} and Computer scored: ${computerScore}`)
+    } else {
+        // Computer wins
+        console.log(`You lose! Computer scored: ${computerScore} and You scored: ${humanScore}`)
+    }
 }
+
+playGame();
