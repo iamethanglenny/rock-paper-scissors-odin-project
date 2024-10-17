@@ -25,41 +25,45 @@ function getHumanChoice() {
     return choice;
 }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
 // Play a round and get the result
 function playRound(humanChoice, computerChoice) {
-
-    // log choices for clarity
-    console.log(`Human choice: ${humanChoice}`);
-    console.log(`Computer choice: ${computerChoice}`);
-
-    // Determine the round winner and update the scores
+    // Determine round winner and return the result
     if (humanChoice === computerChoice) {
-        console.log("It's a tie!") 
+      return "tie";
     } else if (
-        (humanChoice === "rock" && computerChoice === "scissors") ||
-        (humanChoice === "scissors" && computerChoice === "paper") ||
-        (humanChoice === "paper" && computerChoice === "rock")
+      (humanChoice === "rock" && computerChoice === "scissors") ||
+      (humanChoice === "paper" && computerChoice === "rock") ||
+      (humanChoice === "scissors" && computerChoice === "paper")
     ) {
-        // Human wins
-        console.log(`You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`)
-        humanScore++
+      return "human";
     } else {
-        // Computer wins
-        console.log(`You lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`)
-        computerScore++
+      return "computer";
     }
-    // Display updated scores after each round
-    console.log(`Current Scores: Human ${humanScore}, Computer ${computerScore}`)
-}
+  }
 
 
 // Play 5 rounds
     for (let i = 1; i <= 5; i++) {
-        playRound(humanChoice, computerChoice);
-    }
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+
+        // Play a round and get the result
+        const result = playRound(humanChoice, computerChoice);
+
+        if (result === "human") {
+            humanScore++;
+            console.log(`Round ${i}: You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`);
+          } else if (result === "computer") {
+            computerScore++;
+            console.log(`Round ${i}: You lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`);
+          } else {
+            console.log(`Round ${i}: It's a tie!`);
+          }
+      
+          // Display updated score after each round
+          console.log(`Current Score: Human ${humanScore} - Computer ${computerScore}`);
+        }
+    
 
     // Declare overall winner based on scores
     if (humanScore === computerScore) {
