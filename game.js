@@ -1,3 +1,11 @@
+// style heading, sub-heading, and background
+const h1 = document.getElementById("heading");
+h1.setAttribute("style", "color: black; font-size: 42px; text-align: center");
+const p = document.getElementById("sub-heading");
+p.setAttribute("style", "color: #001101; font-size: 24px; text-align: center");
+document.body.style.backgroundColor = "lightblue";
+
+
 function playGame() {
 
 // Initialize scores
